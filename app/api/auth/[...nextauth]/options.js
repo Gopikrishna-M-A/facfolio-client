@@ -38,9 +38,9 @@ export const options = {
                 body: JSON.stringify(newUser),
               });
               // const data = await response.json();
-              if (response.status === 201) {
+              // if (response.status === 201) {
                 return true;
-              }
+              // }
         },
         async session({ session }) {
             const response = await fetch(`${baseURL}/user/email/${session.user.email}`, { method: 'GET' });
