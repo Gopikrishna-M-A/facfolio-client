@@ -28,7 +28,7 @@ const ProfileForm = ({ initialData, baseURL, setprofileData, setIsModalVisible})
         }
     };
 
-    console.log("slugs", slugs);
+    // console.log("slugs", slugs);
 
 
     const handleFormSubmit = async(values) => {
