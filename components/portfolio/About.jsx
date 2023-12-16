@@ -59,7 +59,7 @@ const AboutSection = ({ baseURL, user}) => {
               //   height={240}
               // />
               loading ? 
-                <img src={'/images/placeholder.jpg'} alt="profile" height={240} /> 
+                <img src={'/images/placeholder.jpg'} alt="profile"/> 
                 : <img src={profile.user.authImageUrl} alt="profile" height={240} style={{objectFit:"cover",objectPosition:"center"}}/>
               
             }
