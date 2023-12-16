@@ -71,8 +71,8 @@ const AdminPage = ({ user, baseURL }) => {
 
   return (
     <>
-      <Title style={{margin:"0px"}} level={1}>{userData?.name}</Title>
-      <Button target="_blank" style={{marginBottom:"20px",padding:0}} href={`/portfolio/${userData?.slug}/home`} type="link" icon={<LinkOutlined />}> Go to Portfolio</Button>
+      <Title style={{margin:"0px"}} level={1}>{user.name}</Title>
+      <Button target="_blank" style={{marginBottom:"20px",padding:0}} href={`/portfolio/${user.slug}/home`} type="link" icon={<LinkOutlined />}> Go to Portfolio</Button>
       <div
         className="dashboard"
         style={{ display: "flex", alignItems: "flex-start" }}
