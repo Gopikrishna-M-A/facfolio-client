@@ -58,7 +58,7 @@ const BlogPage = ({ baseURL, user }) => {
       <Card 
       loading={loading}
       className="blog-card" 
-      cover={<img className='blog-img' src={'/images/blog.jpeg'}  alt="blog" width={240} height={240} />}
+      cover={<img className='blog-img' src={post.imageUrl}  alt="blog" width={240} height={240} />}
       style={{ height: '100%' }}
       >
         <Title level={4}>{post.title}</Title>

@@ -97,7 +97,7 @@ const BlogDisplay = ({ userData, baseURL }) => {
             <DeleteOutlined onClick={() => handleDeleteClick(blog._id)} />,
           ]}
           cover={
-            <Image
+            <img
               className="blog-img"
               src={blog.imageUrl}
               alt="blog"
