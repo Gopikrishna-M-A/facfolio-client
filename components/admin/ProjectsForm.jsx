@@ -2,8 +2,10 @@
 import { Form, Input, InputNumber, DatePicker, Button } from 'antd';
 import PublicationForm from './PublicationForm';
 import axios from 'axios';
+import moment from 'moment';
 
 const ProjectForm = ({ current, projectData, setProjectData, setIsModalVisible, baseURL, editMode }) => {
+    console.log("projectData", projectData);
     const handleFormSubmit = async(values) => {
       const newData = {
         ...values,
@@ -43,9 +45,24 @@ const ProjectForm = ({ current, projectData, setProjectData, setIsModalVisible, 
         }
       }
     };
+
+      const initialValues = {
+    title: projectData[current].title,
+    description: projectData[current].description,
+    link: projectData[current].link,
+    tags: projectData[current].tags.join(','), // Assuming tags is an array
+    fundingSources: projectData[current].fundingSources.join(','), // Assuming fundingSources is an array
+    fundingAmount: projectData[current].fundingAmount,
+    collaborators: projectData[current].collaborators.join(','), // Assuming collaborators is an array
+    startDate: moment(projectData[current].startDate),
+    endDate: moment(projectData[current].endDate),
+    publications:projectData[current].publications 
+  };
   
     return (
-      <Form onFinish={handleFormSubmit}>
+      <Form 
+      initialValues={initialValues}
+      onFinish={handleFormSubmit}>
         <Form.Item label="Title" name="title" rules={[{ required: true }]}>
           <Input placeholder={projectData[current].title}/>
         </Form.Item>

@@ -36,7 +36,10 @@ const ResearchForm = ({ researchData, setResearchData, setIsModalVisible, baseUR
     };
   
     return (
-      <Form onFinish={handleFormSubmit}>
+      <Form 
+      onFinish={handleFormSubmit}
+      initialValues={researchData[current]}
+      >
         <Form.Item label="Title" name="title" rules={[{ required: true }]}>
           <Input placeholder={researchData[current].title}/>
         </Form.Item>

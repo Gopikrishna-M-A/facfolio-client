@@ -15,7 +15,9 @@ const HomeForm = ({ initialData, baseURL, setHomeData, setIsModalVisible}) => {
     };
     
     return (
-      <Form onFinish={handleFormSubmit}>
+      <Form 
+      initialValues={initialData}
+      onFinish={handleFormSubmit}>
         <Form.Item  label="CTA Heading" name="ctaheading" rules={[{ required: true }]}>
           <Input  placeholder={initialData.ctaheading}/>
         </Form.Item>

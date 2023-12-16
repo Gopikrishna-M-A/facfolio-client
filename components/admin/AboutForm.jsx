@@ -32,7 +32,9 @@ const AboutForm = ({ initialData, setAboutData, setIsModalVisible, baseURL }) =>
   };
 
   return (
-    <Form onFinish={handleFormSubmit} {...formItemLayout}>
+    <Form 
+    initialValues={initialData}
+    onFinish={handleFormSubmit} {...formItemLayout}>
     <Form.Item label="User Tag" name="userTag" rules={[{ required: true }]}>
       <Input style={inputStyle} />
     </Form.Item>

@@ -34,7 +34,9 @@ const BlogForm = ({ current, blogData, setBlogData, setIsModalVisible, baseURL, 
     };
 
     return (
-      <Form onFinish={handleFormSubmit}>
+      <Form 
+      initialValues={blogData[current]}
+      onFinish={handleFormSubmit}>
         <Form.Item label="Image URL" name="imageUrl">
           <Input placeholder={blogData[current].imageUrl}/>
         </Form.Item>
