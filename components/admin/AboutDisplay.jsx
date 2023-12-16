@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Typography, Button, Modal, Space } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined, DeleteOutlined, EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import AboutForm from './AboutForm'; // Import your AboutForm component
-
+import axios from 'axios';
 const { Title, Paragraph, Text } = Typography;
 
 
@@ -10,10 +10,23 @@ const { Title, Paragraph, Text } = Typography;
 const AboutDisplay = ({ userData, baseURL }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [aboutData, setAboutData] = useState(null);
+  const [isVisible, setIsVisible] = useState();
 
   useEffect(() => {
     setAboutData(userData.about);
+    setIsVisible(userData.about.isVisible);
   }, []);
+
+  useEffect(() => {
+    const updateVisible = async() => {
+      try {
+        const res = await axios.patch(`${baseURL}/about/${aboutData._id}`, { isVisible });
+      }catch(err){
+        console.log(err);
+      }
+    }
+    updateVisible();
+  }, [isVisible]);
 
   const handleEditClick = () => {
     setIsModalVisible(true);
@@ -23,15 +36,20 @@ const AboutDisplay = ({ userData, baseURL }) => {
     setIsModalVisible(false);
   };
 
+
+
+ 
   return (
     <div>
       {aboutData ? (
         <Card
+        className={!isVisible && 'card-hidden'}
         actions={[
-            aboutData.isVisible ? <EyeInvisibleOutlined /> : <EyeOutlined />,
+            isVisible ? <EyeInvisibleOutlined onClick={()=>setIsVisible((prev) => !prev)} /> : <EyeOutlined onClick={()=>setIsVisible((prev) => !prev)}/>,
             <EditOutlined key="edit" onClick={handleEditClick}/>,
             <SettingOutlined />
-          ]} >
+          ]} 
+        >
           <Title className='gradient-text' level={2}>{aboutData.userTag}</Title>
         <Text italic>"{aboutData.quote}"</Text>
         {/* Display other About data as needed */}

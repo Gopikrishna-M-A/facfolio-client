@@ -75,6 +75,22 @@ const BlogDisplay = ({ userData, baseURL }) => {
     });
   };
 
+  const updateVisible = async (blogId, isVisible) => {
+    try {
+      const res = await axios.patch(`${baseURL}/blog/${blogId}`, { isVisible });
+      
+      setBlogData((prevBlogData) =>
+        prevBlogData.map((blog) =>
+          blog._id === blogId ? { ...blog, isVisible } : blog
+        )
+      );
+      
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="admin-info">
       <Button
@@ -90,9 +106,13 @@ const BlogDisplay = ({ userData, baseURL }) => {
       {blogData?.map((blog, index) => (
         <Card
           key={blog._id}
-          className="admin-card"
+          className={!blog.isVisible  ? 'card-hidden admin-card' : 'admin-card'}
           actions={[
-            // <SettingOutlined key='setting' />,
+            blog.isVisible ? (
+              <EyeInvisibleOutlined onClick={() => updateVisible(blog._id, false)} />
+            ) : (
+              <EyeOutlined onClick={() => updateVisible(blog._id, true)} />
+            ),
             <EditOutlined key="edit" onClick={() => handleEditClick(index)} />,
             <DeleteOutlined onClick={() => handleDeleteClick(blog._id)} />,
           ]}

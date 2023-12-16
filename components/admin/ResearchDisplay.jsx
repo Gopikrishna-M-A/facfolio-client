@@ -20,6 +20,7 @@ const ResearchDisplay = ({ userData, baseURL }) => {
   const [researchData, setResearchData] = useState(null);
   const [current, setCurrent] = useState(0);
   const [editMode, setEditMode] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const mockResearchData = [
     {
@@ -36,6 +37,21 @@ const ResearchDisplay = ({ userData, baseURL }) => {
   useEffect(() => {
     setResearchData(userData.research);
   }, []);
+
+
+    const updateVisible = async (researchId, isVisible) => {
+      try {
+        const res = await axios.patch(`${baseURL}/research/${researchId}`, { isVisible });
+        setResearchData((prevResearchData) =>
+        prevResearchData.map((research) =>
+          research._id === researchId ? { ...research, isVisible } : research
+        )
+        );
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
 
   const handleEditClick = (index) => {
     if (index === -1) {
@@ -79,6 +95,9 @@ const ResearchDisplay = ({ userData, baseURL }) => {
     });
   };
 
+
+
+
   return (
     <div className="admin-info">
       <Button
@@ -94,9 +113,13 @@ const ResearchDisplay = ({ userData, baseURL }) => {
       {researchData?.map((research, index) => (
         <Card
           key={research._id}
-          className="admin-card"
+          className={!research.isVisible  ? 'card-hidden admin-card' : 'admin-card'}
           actions={[
-            // <SettingOutlined key="setting" />,
+            research.isVisible ? (
+              <EyeInvisibleOutlined onClick={() => updateVisible(research._id, false)} />
+            ) : (
+              <EyeOutlined onClick={() => updateVisible(research._id, true)} />
+            ),
             <EditOutlined key="edit" onClick={() => handleEditClick(index)} />,
             <DeleteOutlined onClick={() => handleDeleteClick(research._id)} />,
           ]}

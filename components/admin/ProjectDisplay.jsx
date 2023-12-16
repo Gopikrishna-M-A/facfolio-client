@@ -95,6 +95,22 @@ const ProjectDisplay = ({ userData, baseURL }) => {
     });
   };
 
+
+  const updateVisible = async (projectId, isVisible) => {
+    try {
+      const res = await axios.patch(`${baseURL}/project/${projectId}`, { isVisible });
+      
+      setProjectData((prevProjectData) =>
+        prevProjectData.map((project) =>
+          project._id === projectId ? { ...project, isVisible } : project
+        )
+      );
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="admin-info">
       <Button
@@ -110,9 +126,13 @@ const ProjectDisplay = ({ userData, baseURL }) => {
       {projectData?.map((project, index) => (
         <Card
           key={project._id}
-          className="admin-card"
+          className={!project.isVisible  ? 'card-hidden admin-card' : 'admin-card'}
           actions={[
-            // <SettingOutlined key='setting' />,
+            project.isVisible ? (
+              <EyeInvisibleOutlined onClick={() => updateVisible(project._id, false)} />
+            ) : (
+              <EyeOutlined onClick={() => updateVisible(project._id, true)} />
+            ),
             <EditOutlined key="edit" onClick={() => handleEditClick(index)} />,
             <DeleteOutlined onClick={() => handleDeleteClick(project._id)} />,
           ]}

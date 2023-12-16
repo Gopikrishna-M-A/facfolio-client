@@ -339,3 +339,53 @@ p {
   display: flex;
   flex-direction: column;
 }
+
+
+.card-hidden.ant-card .ant-card-body{
+  position: relative;
+  color: rgb(185, 185, 185) !important;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.card-hidden.ant-card .ant-btn,h2{
+  color: rgb(185, 185, 185) !important;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+.card-hidden.ant-card h1{
+  color: rgb(185, 185, 185) !important;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+.card-hidden.ant-card h2{
+  color: rgb(185, 185, 185) !important;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+.card-hidden.ant-card h3{
+  color: rgb(185, 185, 185) !important;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+.card-hidden.ant-card i{
+  color: rgb(185, 185, 185) !important;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+.card-hidden.ant-card .ant-card-body span{
+  color: rgb(185, 185, 185) !important;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.card-hidden.ant-card .ant-card-body a{
+  color: rgb(185, 185, 185) !important;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+.card-hidden.ant-card .ant-card-cover img{
+  filter: grayscale(100%);
+}
+
+
