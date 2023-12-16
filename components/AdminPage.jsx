@@ -9,20 +9,26 @@ import BlogDisplay from "./admin/BlogDisplay";
 import ProfileDisplay from "./admin/ProfileDisplay";
 import ThemeCustomization from "./admin/ThemeCustomization";
 
-import { Button, message, Steps, theme, Typography } from "antd";
+import { Button, message, Steps, Spin, Typography } from "antd";
 const { Title } = Typography;
 import { LinkOutlined } from "@ant-design/icons";
 
 const AdminPage = ({ user, baseURL }) => {
   const [current, setCurrent] = useState(0);
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await axios.get(`${baseURL}/user/info/${user.slug}`);
-      const data = await response.data;
-      // console.log("data",data);
-      setUserData(data);
+      try{
+        const response = await axios.get(`${baseURL}/user/info/${user.slug}`);
+        const data = await response.data;
+        setUserData(data);
+      }catch{
+        console.log("error");
+      }finally{
+        setLoading(false);
+      }
     };
     fetchUser();
   }, [current]);
@@ -73,6 +79,13 @@ const AdminPage = ({ user, baseURL }) => {
     setCurrent(value);
   };
 
+  if (loading) {
+    return (
+      <Spin size="large" tip="Loading..." style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        {/* You can customize the loading spin styles as needed */}
+      </Spin>
+    );
+  }
 
 
   return (
