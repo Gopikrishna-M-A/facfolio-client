@@ -45,6 +45,7 @@ export const options = {
               const data = await response.json();
               session.user._id = data[0]._id;
               session.user.slug = data[0].slug;
+              session.user.name = data[0].name;
             return session
         }
     }

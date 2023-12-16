@@ -6,6 +6,7 @@ import AboutDisplay from "./admin/AboutDisplay";
 import ResearchDisplay from "./admin/ResearchDisplay";
 import ProjectDisplay from "./admin/ProjectDisplay";
 import BlogDisplay from "./admin/BlogDisplay";
+import ProfileDisplay from "./admin/ProfileDisplay";
 import ThemeCustomization from "./admin/ThemeCustomization";
 
 import { Button, message, Steps, theme, Typography } from "antd";
@@ -20,13 +21,17 @@ const AdminPage = ({ user, baseURL }) => {
     const fetchUser = async () => {
       const response = await axios.get(`${baseURL}/user/info/${user.slug}`);
       const data = await response.data;
-      console.log("data",data);
+      // console.log("data",data);
       setUserData(data);
     };
     fetchUser();
   }, [current]);
 
   const steps = [
+    {
+      title: "Profile",
+      content: <ProfileDisplay userData={userData} baseURL={baseURL} />,
+    },
     {
       title: "Theme",
       content: <ThemeCustomization userData={userData} />,
@@ -71,8 +76,8 @@ const AdminPage = ({ user, baseURL }) => {
 
   return (
     <>
-      <Title style={{margin:"0px"}} level={1}>{user.name}</Title>
-      <Button target="_blank" style={{marginBottom:"20px",padding:0}} href={`/portfolio/${user.slug}/home`} type="link" icon={<LinkOutlined />}> Go to Portfolio</Button>
+      <Title style={{margin:"0px"}} level={1}>{userData?.user?.name}</Title>
+      <Button target="_blank" style={{marginBottom:"20px",padding:0}} href={`/portfolio/${userData?.user?.slug}/home`} type="link" icon={<LinkOutlined />}> Go to Portfolio</Button>
       <div
         className="dashboard"
         style={{ display: "flex", alignItems: "flex-start" }}
