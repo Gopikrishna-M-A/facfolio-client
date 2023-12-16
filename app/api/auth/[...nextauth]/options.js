@@ -1,17 +1,17 @@
-// import GitHubProvider from 'next-auth/providers/github'
+import GitHubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 const baseURL = process.env.BASE_URL 
 
 export const options = {
     providers: [
-        // GitHubProvider({
-        //     clientId: process.env.GITHUB_ID,
-        //     clientSecret: process.env.GITHUB_SECRET,
-        // }),
-        GoogleProvider({
-            clientId: process.env.GOOGLE_ID,
-            clientSecret: process.env.GOOGLE_SECRET
-        })
+        GitHubProvider({
+            clientId: process.env.GITHUB_ID,
+            clientSecret: process.env.GITHUB_SECRET,
+        }),
+        // GoogleProvider({
+        //     clientId: process.env.GOOGLE_ID,
+        //     clientSecret: process.env.GOOGLE_SECRET
+        // })
     ],
     theme: {
         colorScheme: "light", // "auto" | "dark" | "light"
@@ -38,9 +38,7 @@ export const options = {
                 body: JSON.stringify(newUser),
               });
               // const data = await response.json();
-              // if (response.status === 201) {
                 return true;
-              // }
         },
         async session({ session }) {
             const response = await fetch(`${baseURL}/user/email/${session.user.email}`, { method: 'GET' });
