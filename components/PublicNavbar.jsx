@@ -76,12 +76,12 @@ const Navbar = () => {
         closable={true} // Disable the close button
         className='menu-drawer'
       >
-            <Link onClick={closeDrawer} href={'/'}><Button block type='default'  className="menu-link">Home</Button></Link>
-            <Link onClick={closeDrawer} href={'/about'}><Button block type='default'  className="menu-link">About</Button></Link>
-            <Link onClick={closeDrawer} href={'/research'}><Button block type='default'  className="menu-link">Research</Button></Link>
-            <Link onClick={closeDrawer} href={'/projects'}><Button block type='default'  className="menu-link">Projects</Button></Link>
-            <Link onClick={closeDrawer} href={'/blogs'}><Button block type='default'  className="menu-link">Blogs</Button></Link>
-            <Link onClick={closeDrawer} href={'/contact'}><Button type='primary' className="menu-contact-btn" block>LET'S TALK</Button></Link>
+            <Link onClick={closeDrawer} href={`/portfolio/${slug}/home`}><Button block type='default'  className={`nav-link ${activeLink === 'home' ? 'active' : ''}`}>Home</Button></Link>
+            <Link onClick={closeDrawer} href={`/portfolio/${slug}/about`}><Button block type='default'  className={`nav-link ${activeLink === 'about' ? 'active' : ''}`}>About</Button></Link>
+            <Link onClick={closeDrawer} href={`/portfolio/${slug}/research`}><Button block type='default'  className={`nav-link ${activeLink === 'research' ? 'active' : ''}`}>Research</Button></Link>
+            <Link onClick={closeDrawer} href={`/portfolio/${slug}/projects`}><Button block type='default'  className={`nav-link ${activeLink === 'projects' ? 'active' : ''}`}>Projects</Button></Link>
+            <Link onClick={closeDrawer} href={`/portfolio/${slug}/blogs`}><Button block type='default'  className={`nav-link ${activeLink === 'blogs' ? 'active' : ''}`}>Blogs</Button></Link>
+            <Link onClick={closeDrawer} href={`/portfolio/${slug}/contact`}><Button type='primary' className="menu-contact-btn" block>LET'S TALK</Button></Link>
       
       </Drawer>
 
