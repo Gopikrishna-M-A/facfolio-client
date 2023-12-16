@@ -28,13 +28,14 @@ const AdminPage = ({ user, baseURL }) => {
   }, [current]);
 
   const steps = [
-    {
-      title: "Profile",
-      content: <ProfileDisplay userData={userData} baseURL={baseURL} />,
-    },
+
     {
       title: "Theme",
       content: <ThemeCustomization userData={userData} />,
+    },
+    {
+      title: "Profile",
+      content: <ProfileDisplay userData={userData} baseURL={baseURL} />,
     },
     {
       title: "Home",
