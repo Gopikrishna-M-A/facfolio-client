@@ -15,30 +15,11 @@ const formatDate = (dateString) => {
 };
 
 
-const ProjectCard = ({ baseURL, user}) => {
-  const [profile, setProfile] = useState([]);
-  const [loading, setLoading] = useState(true);
+const ProjectCard = ({ baseURL, user, data }) => {
+  const [profile, setProfile] = useState(data.project);
+  const [loading, setLoading] = useState(false);
 
-  const url = window.location.pathname;
-  const parts = url.split("/");
-  const slug = parts[parts.length - 2];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const result = await axios(`${baseURL}/user/info/${slug}`);
-        setProfile(result.data.project);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-  // console.log(profile);
 
   return (
     <Row gutter={[16, 16]}>

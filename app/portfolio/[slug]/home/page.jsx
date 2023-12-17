@@ -1,14 +1,24 @@
 import React from 'react'
 import Home from '../../../../components/portfolio/Home'
-import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth/next';
 import { options } from '../../../api/auth/[...nextauth]/options'
 const baseURL = process.env.BASE_URL 
-const page = async() => {
+import axios from 'axios';
+
+
+const fetchData = async (slug) => {
+  const result = await axios(`${baseURL}/user/info/${slug}`);
+  return result.data;
+}
+
+
+
+const page = async({ params }) => {
   const session = await getServerSession(options)
   const user = session?.user
+  const data = await fetchData(params.slug)
   return (
-    <Home baseURL={baseURL} user={user}/>
+    <Home baseURL={baseURL} user={user} data={data}/>
   )
 }
 

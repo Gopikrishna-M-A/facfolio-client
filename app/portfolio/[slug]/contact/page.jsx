@@ -1,14 +1,23 @@
 import React from 'react'
 import Contact from '../../../../components/portfolio/Contact'
-import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth/next';
 import { options } from '../../../api/auth/[...nextauth]/options'
+import axios from 'axios';
+
+
+
 const baseURL = process.env.BASE_URL 
-const page = async() => {
+
+const fetchData = async (slug) => {
+  const result = await axios(`${baseURL}/user/info/${slug}`);
+  return result.data;
+}
+const page = async({ params }) => {
   const session = await getServerSession(options)
   const user = session?.user
+  const data = await fetchData(params.slug)
   return (
-    <Contact baseURL={baseURL} user={user}/>
+    <Contact baseURL={baseURL} user={user} data={data}/>
   )
 }
 

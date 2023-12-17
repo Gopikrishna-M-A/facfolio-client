@@ -17,36 +17,13 @@ import Link from "next/link";
 
 const { Title, Text } = Typography;
 
-const AboutSection = ({ baseURL, user}) => {
-  const [profile, setProfile] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const url = window.location.pathname;
-  const parts = url.split("/");
-  const slug = parts[parts.length - 2];
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const result = await axios(`${baseURL}/user/info/${slug}`);
-        setProfile(result.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }finally{
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  // console.log(profile);
+const AboutSection = ({ baseURL, data}) => {
+  const [loading, setLoading] = useState(false);
+  const [profile, setProfile] = useState(data);
 
   return (
     <div className="about-section">
       <Row gutter={[16, 16]}>
-        {/* Professor's Profile Card */}
         <Col xs={24} sm={24} md={8} lg={8} xl={8}>
           <Card
             loading={loading}
@@ -100,7 +77,6 @@ const AboutSection = ({ baseURL, user}) => {
           </Card>
         </Col>
 
-        {/* Professor's Details */}
         <Col xs={24} sm={24} md={16} lg={16} xl={16}>
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={12} md={12} lg={12} xl={12}>
@@ -121,14 +97,6 @@ const AboutSection = ({ baseURL, user}) => {
               </Card>
             </Col>
 
-            {/* <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-              <Card
-              style={{ height: '100%' }}>
-                <AuditOutlined style={{ fontSize: '24px' }} />
-                <Title level={4}>Quote</Title>
-                <Text>"Without struggle there is no progress" - Frederick Douglass</Text>
-              </Card>
-            </Col> */}
 
             <Col xs={24} sm={12} md={12} lg={12} xl={12}>
               <Card 

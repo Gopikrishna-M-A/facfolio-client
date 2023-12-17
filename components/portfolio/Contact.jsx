@@ -5,34 +5,18 @@ import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
 import axios from "axios";
 const { Title, Text } = Typography;
 
-const ContactPage = ({ baseURL, user}) => {
+const ContactPage = ({ baseURL, user, data }) => {
   const onFinish = (values) => {
     console.log("Received values:", values);
-    // Handle form submission logic here
   };
-  const [profile, setProfile] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [profile, setProfile] = useState(data.user);
+  const [loading, setLoading] = useState(false);
   
   const url = window.location.pathname;
   const parts = url.split("/");
   const slug = parts[parts.length - 2];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const result = await axios(`${baseURL}/user/info/${slug}`);
-        setProfile(result.data.user);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }finally{
-        setLoading(false);
-      }
-    };
 
-    fetchData();
-  }, []);
-  // console.log(profile);
   return (
     <Row gutter={[16, 16]} className="contact-page">
       {/* Left Section */}

@@ -5,33 +5,10 @@ import { Button, Skeleton } from 'antd'
 import Image from 'next/image'
 import axios from 'axios';
 
-const Home = ({ baseURL, user }) => {
+const Home = ({ baseURL, user, data }) => {
 
-  const [profile, setProfile] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const url = window.location.pathname;
-  const parts = url.split("/");
-  const slug = parts[parts.length - 2];
-  // const slug = 'john-doe'
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const result = await axios(`${baseURL}/user/info/${slug}`);
-        setProfile(result.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }finally {
-        setLoading(false);
-      }
-    };
-  
-    fetchData();
-  }, []);
-  
+  const [profile, setProfile] = useState(data);
+  const [loading, setLoading] = useState(false);
 
   
   return (
